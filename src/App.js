@@ -6,8 +6,8 @@ function App() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
+    phone: '',
     password: '',
-    cpassword: '',
     occupation: '',
     gender: '',
     languages: [],
@@ -17,7 +17,6 @@ function App() {
 
   const onChangeHandler = (event) => {
 
-    console.log(event)
     if (event.target.name === 'languages') {
 
       let copy = { ...formData }
@@ -36,7 +35,14 @@ function App() {
         [event.target.name]: event.target.value
       }))
     }
+
+    setFormError(()=>({
+
+      ...formError,
+      [event.target.name]:""
+    }))
   }
+
 
   const validateForm = () => {
     let err = {}
@@ -47,23 +53,20 @@ function App() {
     if (formData.email === '') {
       err.email = 'Email required!'
     } else {
-      let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+      let regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
       if (!regex.test(formData.email)) {
         err.email = 'Email not valid!'
       }
     }
 
-    if (formData.password === '' || formData.cpassword === '') {
-      err.password = 'Password and Confirm Password required!'
+    if (formData.password === '') {
+      err.password = 'Password required!'
     } else {
-      if (formData.password !== formData.cpassword) {
-        err.password = 'Password not matched!'
-      } else {
+
         if (formData.password.length < 6) {
           err.password = 'Password should greater than 6 characters!'
         }
       }
-    }
 
     if (formData.occupation === '') {
       err.occupation = 'Occupation required!'
@@ -82,38 +85,32 @@ function App() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
-    console.log("Form Data:", formData)
-    let isValid = validateForm()
-
-    if (isValid) {
-      alert('Submitted')
-      //API call to server
-    } else {
-      alert('In-Valid Form')
-    }
-    console.log(isValid)
+    // console.log("Form Data:", formData)
+    validateForm()
   }
   return (
     <div className="App">
       <form onSubmit={onSubmitHandler}>
+        <h1>Registration Form</h1>
         <div className="form-group">
-          <label htmlFor="username" className="form-label">User Name</label>
-          <input className="form-control" name="username" onChange={onChangeHandler} value={formData.username} />
+          <label htmlFor="username" className="form-label">Username</label>
+          <input type="text" aria-label='username' className="form-control" name="username" onChange={onChangeHandler} value={formData.username} />
           <span className='non-valid'>{formError.username}</span>
         </div>
         <div className="form-group">
           <label htmlFor="email" className="form-label">Email</label>
-          <input className="form-control" name="email" onChange={onChangeHandler} value={formData.email} />
+          <input type="text" aria-label='email' className="form-control" name="email" onChange={onChangeHandler} value={formData.email} />
           <span className='non-valid'>{formError.email}</span>
         </div>
         <div className="form-group">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input className="form-control" name="password" onChange={onChangeHandler} value={formData.password} />
-          <span className='non-valid'>{formError.password}</span>
+          <label htmlFor="phone" className="form-label">Phone</label>
+          <input type="phone" aria-label='phone'className="form-control" name="phone" onChange={onChangeHandler} value={formData.phone} />
+          <span className='non-valid'>{formError.phone}</span>
         </div>
         <div className="form-group">
-          <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-          <input className="form-control" name="cpassword" onChange={onChangeHandler} value={formData.cpassword} />
+          <label htmlFor="password" className="form-label">Password</label>
+          <input type="password" aria-label='password'className="form-control" name="password" onChange={onChangeHandler} value={formData.password} />
+          <span className='non-valid'>{formError.password}</span>
         </div>
         <div className="form-group">
           <label htmlFor="occupation" className="form-label">Occupation</label>

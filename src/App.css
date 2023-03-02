@@ -1,8 +1,9 @@
 .App {
-  margin: 5%;
-  /* padding: 5% 400px; */
+  margin: 1% 400px;
+  padding: 1% 50px;
   font-size: large;
-  /* text-align: center; */
+  border:solid black;
+  background-color: #c6c9cc;
 }
 
 .form-label {
@@ -30,6 +31,11 @@
 
 .form-group {
   margin-bottom: 1rem;
+}
+
+h1{
+  color:black;
+  padding:0 2%;
 }
 
 .form-select {
