@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react';
+import { registerUser } from './Api/Api';
 
 function App() {
 
@@ -85,7 +86,7 @@ function App() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
-    // console.log("Form Data:", formData)
+    registerUser(formData)
     validateForm()
   }
   return (
@@ -104,7 +105,7 @@ function App() {
         </div>
         <div className="form-group">
           <label htmlFor="phone" className="form-label">Phone</label>
-          <input type="phone" aria-label='phone'className="form-control" name="phone" onChange={onChangeHandler} value={formData.phone} />
+          <input type="textbox" aria-label='phone'className="form-control" name="phone" onChange={onChangeHandler} value={formData.phone} />
           <span className='non-valid'>{formError.phone}</span>
         </div>
         <div className="form-group">
@@ -114,11 +115,11 @@ function App() {
         </div>
         <div className="form-group">
           <label htmlFor="occupation" className="form-label">Occupation</label>
-          <select className="form-select" name="occupation" onChange={onChangeHandler} value={formData.occupation}>
-            <option value=""></option>
-            <option value="student">Student</option>
-            <option value="employee">Employee</option>
-            <option value="other">Other</option>
+          <select className="form-select" aria-label='occupation' name="occupation" onChange={onChangeHandler} value={formData.occupation}>
+            <option aria-label='' value=""></option>
+            <option aria-label='student' value="student">Student</option>
+            <option aria-label='employee' value="employee">Employee</option>
+            <option aria-label='other' value="other">Other</option>
           </select>
           <span className='non-valid'>{formError.occupation}</span>
         </div>
@@ -126,40 +127,40 @@ function App() {
           <label htmlFor="gender" className="form-label">Gender</label>
           <div>
             <div>
-              <input type="radio" name="gender" value="male" onChange={onChangeHandler} checked={formData.gender === 'male'} />
+              <input type="radio" name="gender" value="male" aria-label='male' onChange={onChangeHandler} checked={formData.gender === 'male'} />
               <label htmlFor="male">Male</label>
             </div>
             <div>
-              <input type="radio" name="gender" value="female" onChange={onChangeHandler} checked={formData.gender === 'female'} />
+              <input type="radio" name="gender" value="female" aria-label='female' onChange={onChangeHandler} checked={formData.gender === 'female'} />
               <label htmlFor="female">Female</label>
             </div>
             <div>
-              <input type="radio" name="gender" value="other" onChange={onChangeHandler} checked={formData.gender === 'other'} />
+              <input type="radio" name="gender" value="other" aria-label='other' onChange={onChangeHandler} checked={formData.gender === 'other'} />
               <label htmlFor="other">Other</label>
             </div>
             <span className='non-valid'>{formError.gender}</span>
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="gender" className="form-label">Languages</label>
+          <label htmlFor="languages" className="form-label">Languages</label>
           <div>
             <div>
-              <input type="checkbox" name="languages" value="html" onChange={onChangeHandler} checked={formData.languages.indexOf('html') !== -1} />
+              <input type="checkbox" aria-label='html' name="languages" value="html" onChange={onChangeHandler} checked={formData.languages.indexOf('html') !== -1} />
               <label htmlFor="html">HTML</label>
             </div>
             <div>
-              <input type="checkbox" name="languages" value="css" onChange={onChangeHandler} checked={formData.languages.indexOf('css') !== -1} />
+              <input type="checkbox" aria-label='css' name="languages" value="css" onChange={onChangeHandler} checked={formData.languages.indexOf('css') !== -1} />
               <label htmlFor="css">CSS</label>
             </div>
             <div>
-              <input type="checkbox" name="languages" value="javascript" onChange={onChangeHandler} checked={formData.languages.indexOf('javascript') !== -1} />
+              <input type="checkbox" aria-label='javascript' name="languages" value="javascript" onChange={onChangeHandler} checked={formData.languages.indexOf('javascript') !== -1} />
               <label htmlFor="javascript">Javascript</label>
             </div>
           </div>
           <span className='non-valid'>{formError.languages}</span>
         </div>
         <div className="form-group">
-          <button className="btn" type="submit" >Submit</button>
+          <button className="btn" aria-label='submit' type="submit" >Submit</button>
         </div>
       </form>
     </div>

@@ -1,5 +1,9 @@
+#root{
+  margin: 1% 30vw;
+}
+
 .App {
-  margin: 1% 400px;
+  margin: 1% 6%;
   padding: 1% 50px;
   font-size: large;
   border:solid black;
@@ -35,7 +39,7 @@
 
 h1{
   color:black;
-  padding:0 2%;
+  padding:0 3.5vw;
 }
 
 .form-select {
