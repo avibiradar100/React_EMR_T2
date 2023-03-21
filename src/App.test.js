@@ -3,26 +3,20 @@ import App from './App';
 import user from '@testing-library/user-event'
 import * as Api from './Api/Api'
 
+// mocking function registerUser from ./Api/Api.js
+jest.mock('./Api/Api.js')
 
 // test suite for registeration form
 describe("Registeration form",()=>{
     
-    // mocking function registerUser from ./Api/Api.js
-    jest.mock('./Api/Api.js')
-    Api.registerUser = jest.fn();
-
     // runs before the every test case
     beforeEach(()=>{
-        
-        //making function to behave noramlly i.e without mocking
-        Api.registerUser.mockClear();
-
         // rendering of component
         render(<App/>);
     })
 
-    test("providing all inputs valid form should be submitted ",async()=>{
-
+    // testing when input data passed the all validations
+    test("form should be submitted on all correct inputs ",async()=>{
         // selecting element field through fns return below and providing input for that by using userevent from testing library react
         user.type(getUserName(),'Hello');
         user.type(getUserEmail(),'avinash@gmail.com');
@@ -54,6 +48,35 @@ describe("Registeration form",()=>{
         expect(Api.registerUser).toHaveBeenCalledTimes(1);
         
     })
+
+    // testing when all validations failed
+    test("should give alert for incorrect inputs",async()=>{
+
+        // selecting element field through fns return below and providing input for that by using userevent from testing library react
+        user.type(getUserName(),'');
+        user.type(getUserEmail(),'avinashgmail.com');
+        user.type(getUserPassword(),'aviansh123');
+        user.type(getUserPhone(),'1344234');
+        selectOccupation('student');
+        user.click(selectGender('male'));
+        user.click(selectLanguage('html'));
+        user.click(selectLanguage('css'));
+        user.click(SubmitButton());
+
+        await waitFor(() => {
+
+            expect(screen.getByText('please Enter username!')).toBeInTheDocument();
+            expect(screen.getByText('Email is Invalid!')).toBeInTheDocument();
+            expect(screen.getByText('Phone no is incorrect')).toBeInTheDocument();
+        });
+        
+        // as we have mocked the registerUser function checking no of times we called it 
+        expect(Api.registerUser).toHaveBeenCalledTimes(1);
+        
+    })
+
+
+
 
 })
 

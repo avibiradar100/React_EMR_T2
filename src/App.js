@@ -49,19 +49,21 @@ function App() {
     let err = {}
 
     if (formData.username === '') {
-      err.username = 'Username required!'
+      err.username = 'please Enter username!'
     }
     if (formData.email === '') {
-      err.email = 'Email required!'
+      err.email = 'please Enter email!'
     } else {
       let regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
       if (!regex.test(formData.email)) {
-        err.email = 'Email not valid!'
+        err.email = 'Email is Invalid!'
       }
     }
-
+    if (formData.phone.length !==10) {
+      err.phone = 'Phone no is incorrect'
+    }
     if (formData.password === '') {
-      err.password = 'Password required!'
+      err.password = 'please Enter password!'
     } else {
 
         if (formData.password.length < 6) {
@@ -70,10 +72,10 @@ function App() {
       }
 
     if (formData.occupation === '') {
-      err.occupation = 'Occupation required!'
+      err.occupation = 'please Provide Occupation!'
     }
     if (formData.gender === '') {
-      err.gender = 'Gender required!'
+      err.gender = 'please Select Occupation!'
     }
     if (formData.languages.length < 1) {
       err.languages = 'Any one language required!'
