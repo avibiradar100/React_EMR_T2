@@ -25,28 +25,28 @@ import * as math from './math.js'
 // math.add = jest.fn();
 // math.subtract = jest.fn();
 
-jest.mock("./math")
+// jest.mock("./math")
 
-test("calls math.add", () => {
-  calculation.doAdd(1, 2);
-  expect(math.add).toHaveBeenCalledWith(1, 2);
-});
+// test("calls math.add", () => {
+//   calculation.doAdd(1, 2);
+//   expect(math.add).toHaveBeenCalledWith(1, 2);
+// });
 
-test("calls math.subtract", () => {
-  calculation.doSubtract(1, 2);
-  expect(math.subtract).toHaveBeenCalledWith(1, 2);
-});
+// test("calls math.subtract", () => {
+//   calculation.doSubtract(1, 2);
+//   expect(math.subtract).toHaveBeenCalledWith(1, 2);
+// });
 
 // 3.Spying and mocking
 test("Spying and mocking", () => {
 
-        const addMock=jest.spyOn(math,"add");
+        let addMock=jest.spyOn(math,"add");
 
         // override the implementation
         addMock.mockImplementation(() => "Hello");
-        expect(app.doAdd(1, 2)).toEqual("Hello");
+        expect(calculation.doAdd(1, 2)).toEqual("Hello");
 
         // restore the original implementation
         addMock.mockRestore();
-        expect(app.doAdd(1, 2)).toEqual(3);
+        expect(calculation.doAdd(1, 2)).toEqual(3);
 })
