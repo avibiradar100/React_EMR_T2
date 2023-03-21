@@ -75,7 +75,7 @@ function App() {
       err.occupation = 'please Provide Occupation!'
     }
     if (formData.gender === '') {
-      err.gender = 'please Select Occupation!'
+      err.gender = 'please Select Gender!'
     }
     if (formData.languages.length < 1) {
       err.languages = 'Any one language required!'

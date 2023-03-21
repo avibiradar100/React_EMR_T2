@@ -55,12 +55,12 @@ describe("Registeration form",()=>{
         // selecting element field through fns return below and providing input for that by using userevent from testing library react
         user.type(getUserName(),'');
         user.type(getUserEmail(),'avinashgmail.com');
-        user.type(getUserPassword(),'aviansh123');
+        user.type(getUserPassword(),'avi13');
         user.type(getUserPhone(),'1344234');
-        selectOccupation('student');
-        user.click(selectGender('male'));
-        user.click(selectLanguage('html'));
-        user.click(selectLanguage('css'));
+        selectOccupation('');
+        user.click(selectGender(''));
+        // user.click(selectLanguage(''));
+        // user.click(selectLanguage(''));
         user.click(SubmitButton());
 
         await waitFor(() => {
@@ -68,6 +68,10 @@ describe("Registeration form",()=>{
             expect(screen.getByText('please Enter username!')).toBeInTheDocument();
             expect(screen.getByText('Email is Invalid!')).toBeInTheDocument();
             expect(screen.getByText('Phone no is incorrect')).toBeInTheDocument();
+            expect(screen.getByText('Password should greater than 6 characters!')).toBeInTheDocument();
+            expect(screen.getByText('please Provide Occupation!')).toBeInTheDocument();
+            expect(screen.getByText('please Select Gender!')).toBeInTheDocument();
+            expect(screen.getByText('Any one language required!')).toBeInTheDocument();
         });
         
         // as we have mocked the registerUser function checking no of times we called it 
